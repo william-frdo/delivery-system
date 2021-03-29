@@ -6,7 +6,7 @@ import { ReactComponent as InstagramIcon } from './instagram.svg';
 function Footer() {
     return (
         <footer className="main-footer">
-            Trabalho de Conclusão de Curso de Desenvolvimento de Sistemas ETEC 2021 < br/>
+            <strong>Trabalho de Conclusão de Curso de Desenvolvimento de Sistemas ETEC 2021</strong> < br/>
             Camila S. M. A. Borges, Christiane N. Gozza, Wesley C. Davanzo, William Florido
             <div className="footer-icons">
                 <a href="https://www.youtube.com/channel/UCc7rfCbP90qiw3BgT-Iqc7g" target="_new">
