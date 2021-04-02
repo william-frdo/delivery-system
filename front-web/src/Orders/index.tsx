@@ -4,6 +4,7 @@ import StepsHeader from './StepsHeader';
 import ProductsList from './ProductsList';
 import { Product } from './types';
 import { fetchProducts } from '../api';
+import OrderLocation from './OrderLocation';
 
 function Orders() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -18,6 +19,7 @@ function Orders() {
         <div className="orders-container">
             <StepsHeader />
             <ProductsList products={products} />
+            <OrderLocation />
         </div>
     )
 }
