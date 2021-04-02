@@ -22,22 +22,21 @@ function OrderLocation() {
         position: initialPosition
     });
     // Need be fixed because this is getting error on "loadOptions={loadOptions}"
-    const loadOptions = async (inputValue: string, callback: (places: Place[]) => void) => {
-        const response = await fetchLocalMapbox(inputValue);
-      
-        const places = response.data.features.map((item: any) => {
-          return ({
-            label: item.place_name,
-            value: item.place_name,
-            position: {
-              lat: item.center[1],
-              lng: item.center[0]
-            }
-          });
-        });
-      
-        callback(places);
-    };
+    const mapResponseToPlaces = (item: any) => (
+    {
+        label: item.place_name,
+        value: item.place_name,
+        position: {
+            lat: item.center[1],
+            lng: item.center[0]
+        }
+    });
+
+    const loadOptions = async (inputValue : string) => {        
+        const data = await fetchLocalMapbox(inputValue);
+        const results = await data.data.features;        
+        return results.map(mapResponseToPlaces);
+    }
 
     const handleChangeSelect = (place: Place) => {
         setAddress(place);
