@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import AsyncSelect from 'react-select/async';
 import { fetchLocalMapbox } from '../api';
+import { OrderLocationdata } from './types';
 
 const initialPosition = {
     lat: -23.562085,
@@ -17,11 +18,15 @@ type Place = {
     };
 }
 
-function OrderLocation() {
+type Props = {
+    onChangeLocation: (location: OrderLocationdata) => void;
+}
+
+function OrderLocation({ onChangeLocation }: Props) {
     const [address, setAddress] = useState<Place>({
         position: initialPosition
     });
-    // Need be fixed because this is getting error on "loadOptions={loadOptions}"
+    
     const mapResponseToPlaces = (item: any) => (
     {
         label: item.place_name,
@@ -40,11 +45,11 @@ function OrderLocation() {
 
     const handleChangeSelect = (place: Place) => {
         setAddress(place);
-        //onChangeLocation({
-        //  latitude: place.position.lat,
-        //  longitude: place.position.lng,
-        //  address: place.label!
-        //});
+        onChangeLocation({
+          latitute: place.position.lat,
+          longitude: place.position.lng,
+          address: place.label!
+        });
     };
 
     return (
@@ -57,14 +62,14 @@ function OrderLocation() {
                     <AsyncSelect
                         placeholder="Digite um endereço para entregar o pedido"
                         className="filter"
-                        // Getting error: No overload matches this call
-                        //loadOptions={loadOptions}
+                        loadOptions={loadOptions}
                         onChange={value  => handleChangeSelect(value as Place)}
                     />
                 </div>
                 <MapContainer
                     center={address.position}
                     zoom={14}
+                    key={address.position.lat}
                     scrollWheelZoom
                 >
                     <TileLayer
@@ -73,7 +78,7 @@ function OrderLocation() {
                     />
                     <Marker position={address.position}>
                         <Popup>
-                            Meu marcador
+                            {address.label}
                         </Popup>
                     </Marker>
                 </MapContainer>
