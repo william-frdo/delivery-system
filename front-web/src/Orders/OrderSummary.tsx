@@ -1,4 +1,3 @@
-import { format } from "node:path";
 import { formatPrice } from "./helpers";
 
 type Props = {
