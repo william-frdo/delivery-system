@@ -39,7 +39,7 @@ function OrderLocation({ onChangeLocation }: Props) {
 
     const loadOptions = async (inputValue : string) => {        
         const data = await fetchLocalMapbox(inputValue);
-        const results = await data.data.features;        
+        const results = await data.data.features;
         return results.map(mapResponseToPlaces);
     }
 
@@ -63,7 +63,7 @@ function OrderLocation({ onChangeLocation }: Props) {
                         placeholder="Digite um endereço para entregar o pedido"
                         className="filter"
                         loadOptions={loadOptions}
-                        onChange={value  => handleChangeSelect(value as Place)}
+                        onChange={value => handleChangeSelect(value as Place)}
                     />
                 </div>
                 <MapContainer
