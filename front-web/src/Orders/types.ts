@@ -7,7 +7,7 @@ export type Product = {
 }
 
 export type OrderLocationData = {
-    latitute: number;
+    latitude: number;
     longitude: number;
     address: string;
 }
